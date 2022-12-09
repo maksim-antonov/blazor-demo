@@ -1,14 +1,15 @@
 function applyCarousel() {
-  waitForCarousel('.ms-category-block').then((elm) => {
+  waitForCarousel('#index-loaded').then((elm) => {
+    /* mini carousel */
     const carouselBlock = $('.ms-category-block')
     const carouselSpeed = Number.parseInt(carouselBlock.attr('data-carousel-speed'))
-
+    console.log('carousel mini speed is ' + carouselSpeed)
     carouselBlock.owlCarousel({
       margin: 24, // margin in pixels, lib makes it responsive
       loop: true,
       dots: false,
       nav: false,
-      smartSpeed: 1500, // sliding speed
+      smartSpeed: carouselSpeed, // sliding speed
       autoplay: true,
       autoplayTimeout: carouselSpeed,
       autoplayHoverPause: true,
@@ -35,6 +36,26 @@ function applyCarousel() {
         }
       }
     });
+    
+    /* big carousel */
+    const carouselBig = $('.ms-category-big')
+    const carouselBigSpeed = Number.parseInt(carouselBig.attr('data-carousel-speed'))
+
+    console.log('carousel big speed is ' + carouselBigSpeed)
+    
+    carouselBig.owlCarousel({
+      margin: 24, // margin in pixels, lib makes it responsive
+      loop: true,
+      dots: false,
+      nav: false,
+      smartSpeed: carouselBigSpeed, // sliding speed
+      autoplay: true,
+      autoplayTimeout: carouselBigSpeed,
+      autoplayHoverPause: true,
+      items: 1, // default value of items count
+    });
+    
+    
   })
 }
 

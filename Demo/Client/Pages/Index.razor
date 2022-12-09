@@ -6,7 +6,7 @@
 
 <PageTitle>Image carousel</PageTitle>
 
-<h1>Image carousel</h1>
+<h1>Image carousel SWIPE IT</h1>
 
 <p>This component demonstrates fetching data from the server & my carousel</p>
 
@@ -18,7 +18,7 @@
 }
 else
 {
-    <div class="article" @ref="Measure">
+    <div id="index-loaded" class="article" @ref="Measure">
         <section id="init-section">
             <div class="container">
                 <h1>Init</h1>
@@ -56,6 +56,27 @@ else
                                 <div class="ms-cat-box">
                                     <span class="ms-cat-icon">
                                         <span class="ms-lbl">discount!</span>
+                                        <img src="data:image/png;base64,@Convert.ToBase64String(item.ImageData)" alt="@item.ImageTitle in @item.ImageCarouselId">
+                                        <h4 class="ms-cat-title">@(item.ImageTitle.ToDefaultTitle())</h4>
+                                        <p class="items">desc here</p>
+                                    </span>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="ms-category">
+            <div class="container">
+                <h2>Big carousel</h2>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="ms-category-big owl-carousel" data-carousel-speed="@(imageCarousel.CarouselSpeed * 5)">
+                            @foreach (var item in imageCarousel.Images)
+                            {
+                                <div class="ms-cat-box">
+                                    <span class="ms-cat-icon">
                                         <img src="data:image/png;base64,@Convert.ToBase64String(item.ImageData)" alt="@item.ImageTitle in @item.ImageCarouselId">
                                         <h4 class="ms-cat-title">@(item.ImageTitle.ToDefaultTitle())</h4>
                                         <p class="items">desc here</p>
