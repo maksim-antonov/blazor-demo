@@ -8,7 +8,7 @@
 
 <h1>Image carousel</h1>
 
-<p>This component demonstrates fetching data from the server.</p>
+<p>This component demonstrates fetching data from the server & my carousel</p>
 
 @if (imageCarousel == null)
 {
@@ -19,80 +19,53 @@
 else
 {
     <div class="article" @ref="Measure">
-        <section class="init-section">
-            <h1>Init</h1>
-            <p>Carousel speed: @imageCarousel.CarouselSpeed</p>
-            <p>Images: </p>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Picture</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach (var image in imageCarousel.Images)
-                {
+        <section id="init-section">
+            <div class="container">
+                <h1>Init</h1>
+                <p>Carousel speed: @imageCarousel.CarouselSpeed</p>
+                <p>Images: </p>
+                <table class="table">
+                    <thead>
                     <tr>
-                        <td>@image.ImageTitle</td>
-                        <td>
-                            <img width="100px" src="data:image/png;base64,@Convert.ToBase64String(image.ImageData)" alt="@image.ImageTitle in @image.ImageCarouselId"/>
-                        </td>
+                        <th>Title</th>
+                        <th>Picture</th>
                     </tr>
-                }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    @foreach (var image in imageCarousel.Images)
+                    {
+                        <tr>
+                            <td>@image.ImageTitle</td>
+                            <td>
+                                <img width="100px" src="data:image/png;base64,@Convert.ToBase64String(image.ImageData)" alt="@image.ImageTitle in @image.ImageCarouselId"/>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
         </section>
-        <section class="carousel-section" style="background-color: #bcd0c7">
-            <h2>Carousel</h2>
-
-            <div class="contianer">
+        <section class="ms-category">
+            <div class="container">
+                <h2>Carousel</h2>
                 <div class="row">
                     <div class="col-xl-12">
-                        <div class="owl-carousel owl-theme">
-                                        <div class="item">
-                                            <span class="image">
-                                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/orange-tree.jpg" alt="orange tree"/>
-                                            </span>
-                                            <span class="brief">
-                                                <h4>consultingdd</h4>
-                                                <p>test test</p>
-                                            </span>
-                                        </div>
-                        
-                                        <div class="item">
-                                            <span class="image">
-                                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/orange-tree.jpg" alt="orange tree"/>
-                                            </span>
-                                            <span class="brief">
-                                                <h4>consultingdd</h4>
-                                                <p>test test</p>
-                                            </span>
-                                        </div>
-                        
-                                        <div class="item">
-                                            <span class="image">
-                                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/orange-tree.jpg" alt="orange tree"/>
-                                            </span>
-                                            <span class="brief">
-                                                <h4>consultingdd</h4>
-                                                <p>test test</p>
-                                            </span>
-                                        </div>
-                        
-                                        <div class="item">
-                                            <span class="image">
-                                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/orange-tree.jpg" alt="orange tree"/>
-                                            </span>
-                                            <span class="brief">
-                                                <h4>consultingdd</h4>
-                                                <p>test test</p>
-                                            </span>
-                                        </div>
-                                    </div>
+                        <div class="ms-category-block owl-carousel" data-carousel-speed="@imageCarousel.CarouselSpeed">
+                            @foreach (var item in imageCarousel.Images)
+                            {
+                                <div class="ms-cat-box">
+                                    <span class="ms-cat-icon">
+                                        <span class="ms-lbl">discount!</span>
+                                        <img src="data:image/png;base64,@Convert.ToBase64String(item.ImageData)" alt="@item.ImageTitle in @item.ImageCarouselId">
+                                        <h4 class="ms-cat-title">@(item.ImageTitle.ToDefaultTitle())</h4>
+                                        <p class="items">desc here</p>
+                                    </span>
+                                </div>
+                            }
+                        </div>
                     </div>
                 </div>
-                </div>
+            </div>
         </section>
     </div>
 }
@@ -101,7 +74,7 @@ else
     private ElementReference Measure;
 
     private ImageCarousel? imageCarousel;
-
+    
     protected override async Task OnInitializedAsync()
     {
         imageCarousel = await Http.GetFromJsonAsync<ImageCarousel>("/api/Images/ImageCarousel");
@@ -111,6 +84,7 @@ else
     {
         if (firstRender)
         {
+            // app.js
             await _jsRuntime.InvokeVoidAsync("applyCarousel");
         }
 

@@ -106,19 +106,124 @@ a, .btn-link {
     content: var(--blazor-load-percentage-text, "Loading");
 }
 
+.section {
+    margin-bottom: 15px;
+}
+
 .row {
     margin: 0 auto;
-    max-width: 62.5rem;
     width: 100%;
 }
 
-.owl-carousel .item {
-    height: 10rem;
-    background: #4DC7A0;
-    padding: 1rem;
+.ms-category .ms-category-block {
+    margin-top: 30px;
+    padding: 24px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    border: 1px solid #eee;
+    border-radius: 3px;
 }
-
-.main-carousel img {
-    display: block;
-    height: 200px;
+.ms-category .ms-category-block .ms-cat-box {
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    border-radius: 3px;
+    background: #f5f4f9;
+    border: 1px solid #eee;
+}
+.ms-category .ms-category-block .ms-cat-box .ms-cat-icon {
+    height: 100%;
+    padding: 15px 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    position: relative;
+}
+.ms-category .ms-category-block .ms-cat-box .ms-cat-icon:hover img {
+    -webkit-animation: catshake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    animation: catshake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
+}
+@-webkit-keyframes catshake {
+    10%, 90% {
+        -webkit-transform: translate3d(-1px, 0, 0);
+        transform: translate3d(-1px, 0, 0);
+    }
+    20%, 80% {
+        -webkit-transform: translate3d(2px, 0, 0);
+        transform: translate3d(2px, 0, 0);
+    }
+    30%, 50%, 70% {
+        -webkit-transform: translate3d(-4px, 0, 0);
+        transform: translate3d(-4px, 0, 0);
+    }
+    40%, 60% {
+        -webkit-transform: translate3d(4px, 0, 0);
+        transform: translate3d(4px, 0, 0);
+    }
+}
+@keyframes catshake {
+    10%, 90% {
+        -webkit-transform: translate3d(-1px, 0, 0);
+        transform: translate3d(-1px, 0, 0);
+    }
+    20%, 80% {
+        -webkit-transform: translate3d(2px, 0, 0);
+        transform: translate3d(2px, 0, 0);
+    }
+    30%, 50%, 70% {
+        -webkit-transform: translate3d(-4px, 0, 0);
+        transform: translate3d(-4px, 0, 0);
+    }
+    40%, 60% {
+        -webkit-transform: translate3d(4px, 0, 0);
+        transform: translate3d(4px, 0, 0);
+    }
+}
+.ms-category .ms-category-block .ms-cat-box .ms-cat-icon img {
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    width: auto;
+    max-width: 250px;
+    height: 50px;
+}
+.ms-category .ms-category-block .ms-cat-box .ms-cat-icon .ms-cat-title {
+    margin: 15px 0 0 0;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #17181c;
+}
+.ms-category .ms-category-block .ms-cat-box .ms-cat-icon .items {
+    margin: 0;
+    font-size: 14px;
+    line-height: 28px;
+    color: #777;
+}
+.ms-category .ms-category-block .ms-cat-box .ms-cat-icon .ms-lbl {
+    padding: 0 5px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #3e9172;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 3px;
 }

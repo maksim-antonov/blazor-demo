@@ -9,7 +9,7 @@ public class ImagesController : ControllerBase
 {
     private static readonly string CarouselId = Guid.NewGuid().ToString();
 
-    private static readonly ImageCarousel Carousel = new ImageCarousel
+    private static readonly ImageCarousel Carousel = new()
     {
         Id = CarouselId,
         Images = new Image[]
@@ -24,7 +24,7 @@ public class ImagesController : ControllerBase
             new()
             {
                 Id = 1,
-                ImageTitle = "Profile Image",
+                ImageTitle = "Maksim Antonov",
                 ImageCarouselId = CarouselId,
                 ImageData = System.IO.File.ReadAllBytes("./ImageFiles/ava.png")
             },
@@ -59,6 +59,10 @@ public class ImagesController : ControllerBase
         _logger = logger;
     }
 
+    /// <summary>
+    /// API method that returns single Carousel obj
+    /// With a collection of Images and Random carousel speed
+    /// </summary>
     [HttpGet]
     [Route("ImageCarousel")]
     public ActionResult<ImageCarousel> GetImageCarousel()
@@ -67,7 +71,7 @@ public class ImagesController : ControllerBase
         {
             Id = Carousel.Id,
             Images = Carousel.Images,
-            CarouselSpeed = Random.Shared.Next(3, 12) * 100
+            CarouselSpeed = Random.Shared.Next(6, 15) * 100
         };
 
         return carousel;
