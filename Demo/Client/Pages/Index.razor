@@ -1,9 +1,120 @@
 ﻿@page "/"
+@using Demo.Shared
+@using Demo.Shared.Extensions
+@inject HttpClient Http
+@inject IJSRuntime _jsRuntime
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Image carousel</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1>Image carousel</h1>
 
-Welcome to your new app.
+<p>This component demonstrates fetching data from the server.</p>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+@if (imageCarousel == null)
+{
+    <p>
+        <em>Loading...</em>
+    </p>
+}
+else
+{
+    <div class="article" @ref="Measure">
+        <section class="init-section">
+            <h1>Init</h1>
+            <p>Carousel speed: @imageCarousel.CarouselSpeed</p>
+            <p>Images: </p>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Picture</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var image in imageCarousel.Images)
+                {
+                    <tr>
+                        <td>@image.ImageTitle</td>
+                        <td>
+                            <img width="100px" src="data:image/png;base64,@Convert.ToBase64String(image.ImageData)" alt="@image.ImageTitle in @image.ImageCarouselId"/>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </section>
+        <section class="carousel-section" style="background-color: #bcd0c7">
+            <h2>Carousel</h2>
+
+            <div class="contianer">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="owl-carousel owl-theme">
+                                        <div class="item">
+                                            <span class="image">
+                                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/orange-tree.jpg" alt="orange tree"/>
+                                            </span>
+                                            <span class="brief">
+                                                <h4>consultingdd</h4>
+                                                <p>test test</p>
+                                            </span>
+                                        </div>
+                        
+                                        <div class="item">
+                                            <span class="image">
+                                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/orange-tree.jpg" alt="orange tree"/>
+                                            </span>
+                                            <span class="brief">
+                                                <h4>consultingdd</h4>
+                                                <p>test test</p>
+                                            </span>
+                                        </div>
+                        
+                                        <div class="item">
+                                            <span class="image">
+                                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/orange-tree.jpg" alt="orange tree"/>
+                                            </span>
+                                            <span class="brief">
+                                                <h4>consultingdd</h4>
+                                                <p>test test</p>
+                                            </span>
+                                        </div>
+                        
+                                        <div class="item">
+                                            <span class="image">
+                                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/orange-tree.jpg" alt="orange tree"/>
+                                            </span>
+                                            <span class="brief">
+                                                <h4>consultingdd</h4>
+                                                <p>test test</p>
+                                            </span>
+                                        </div>
+                                    </div>
+                    </div>
+                </div>
+                </div>
+        </section>
+    </div>
+}
+
+@code {
+    private ElementReference Measure;
+
+    private ImageCarousel? imageCarousel;
+
+    protected override async Task OnInitializedAsync()
+    {
+        imageCarousel = await Http.GetFromJsonAsync<ImageCarousel>("/api/Images/ImageCarousel");
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await _jsRuntime.InvokeVoidAsync("applyCarousel");
+        }
+
+        await base.OnAfterRenderAsync(firstRender);
+    }
+
+}

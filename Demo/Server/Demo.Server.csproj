@@ -1,18 +1,26 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.11" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Client\Demo.Client.csproj" />
     <ProjectReference Include="..\Shared\Demo.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ImageFiles\ava.png" />
+    <Content Include="ImageFiles\heis.png" />
+    <Content Include="ImageFiles\hiremenow.png" />
+    <Content Include="ImageFiles\nicedev.png" />
+    <Content Include="ImageFiles\youneed.png" />
   </ItemGroup>
 
 
